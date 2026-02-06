@@ -1,7 +1,119 @@
 ---
 import LayoutChallenges from "../../layouts/LayoutChallenges.astro";
+
+import Image from "../../components/Image.astro";
+
+const pictures = [
+  {
+    imgDesktop: "/img-of-challenges/second/image-product-desktop.jpg",
+    altDesktop: "product desktop",
+  },
+  {
+    imgMobile: "/img-of-challenges/second/image-product-mobile.jpg",
+    altMobile: "product mobile",
+  },
+];
 ---
 
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Montserrat:wght@500;700&display=swap");
+
+  :root {
+    /* Colors */
+
+    /* Primary */
+
+    --Cyan: hsl(158, 36%, 37%);
+    --Dark-cyan: hsl(158, 33.05%, 17.27%);
+    --Cream: hsl(30, 38%, 92%);
+
+    /* Neutral */
+
+    --Very-dark-blue: hsl(212, 21%, 14%);
+    --Dark-grayish-blue: hsl(228, 12%, 48%);
+    --White: hsl(0, 0%, 100%);
+
+    /* Typography */
+
+    /* Body Copy */
+
+    --Font-size-paragraph: 14px;
+
+    /* Font */
+
+    --Family-montserrat: "Montserrat", sans-serif;
+    --Weights-montserrat: 500, 700;
+
+    --Family-fraunces: "Fraunces", serif;
+    --Weights-fraunces: 700;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--Cream);
+    height: 100%;
+  }
+</style>
+
 <LayoutChallenges title="Preview Card Component">
-  <main></main>
+  <main
+    class="flex flex-col m-4 md:h-[90%] md:flex-row md:place-items-center md:place-content-center md:m-auto"
+  >
+    <header class="h-[15rem] md:h-[409px] md:w-[273px]">
+      <Image
+        classImg="hidden md:inline md:w-full rounded-l-lg"
+        img={pictures[0].imgDesktop}
+        alt={pictures[0].altDesktop}
+      />
+      <Image
+        classImg="block md:hidden size-full rounded-t-lg"
+        img={pictures[1].imgMobile}
+        alt={pictures[1].altMobile}
+      />
+    </header>
+
+    <section
+      class="font-[family-name:var(--Family-fraunces)] p-[1.4rem] bg-[--White] md:rounded-r-lg md:w-[286px] md:h-[410px] rounded-b-lg"
+    >
+      <h1
+        class="font-[family-name:var(--Family-montserrat)] text-sm font-medium tracking-[0.2rem] text-[--Dark-grayish-blue] md:text-xs md:tracking-[0.35rem]"
+      >
+        PERFUME
+      </h1>
+      <h2
+        class="text-[2rem] leading-[2rem] text-[--Very-dark-blue] pt-2 md:pt-4"
+      >
+        Gabrielle Essence Eau De Parfum
+      </h2>
+      <p
+        class="text-[--Dark-grayish-blue] font-[family-name:var(--Family-montserrat)] py-4 px-[0.2rem] text-sm md:py-6 md:px-[0.2rem]"
+      >
+        A floral, solar and voluptuous interpretation composed by Olivier Polge,
+        Perfumer-Creator for the House of CHANEL
+      </p>
+      <div class="pb-4 md:pb-6">
+        <p class="text-[2rem] flex items-center text-[--Cyan]">
+          $149.99 <span
+            class="text-sm ml-2 text-[--Dark-grayish-blue] font-[family-name:var(--Family-montserrat)] md:text-xs"
+            ><s>$169.99</s></span
+          >
+        </p>
+      </div>
+      <button
+        class="w-full h-[2.5rem] rounded-lg bg-[var(--Cyan)] text-[var(--Cream)] font-bold border-none flex items-center place-content-center gap-2 hover:bg-[var(--Dark-cyan)] hover:transition-all hover:duration-500 cursor-pointer"
+        ><Image
+          classImg="w-[0.9rem] h-4 overflow-inherit"
+          img="/img-of-challenges/second/icon-cart.svg"
+          alt="cart"
+        />Add to Cart</button
+      >
+    </section>
+  </main>
 </LayoutChallenges>

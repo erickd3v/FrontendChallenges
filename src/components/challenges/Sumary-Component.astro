@@ -3,11 +3,10 @@ interface Props {
   firstClassdiv: string;
   secondClassdiv: string;
   text: string;
-  numbers: string;
   num: string;
 }
 
-const { firstClassdiv, secondClassdiv, text, numbers, num } = Astro.props;
+const { firstClassdiv, secondClassdiv, text, num } = Astro.props;
 ---
 
 <div
@@ -19,5 +18,5 @@ const { firstClassdiv, secondClassdiv, text, numbers, num } = Astro.props;
     <slot />
     <p class="w-[70px]">{text}</p>
   </div>
-  <p class={numbers}>{`${num}`} <span class="text-[#c8c7ff]">/ 100</span></p>
+  <p>{`${num}`} <span class="text-[#c8c7ff]">/ 100</span></p>
 </div>

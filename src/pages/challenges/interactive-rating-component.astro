@@ -1,7 +1,169 @@
 ---
 import LayoutChallenges from "../../layouts/LayoutChallenges.astro";
+
+// Components
+import InteractiveSection from "../../components/challenges/InteractiveSection.astro";
 ---
 
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap");
+
+  :root {
+    /* Colors */
+
+    /* Primary */
+
+    --Orange: hsl(25, 97%, 53%);
+
+    /* Neutral */
+
+    --White: hsl(0, 0%, 100%);
+    --Light-Grey: hsl(217, 12%, 63%);
+    --Medium-Grey: hsl(216, 12%, 54%);
+    --Dark-Blue: hsl(213, 19%, 18%);
+    --Very-Dark-Blue: hsl(216, 12%, 8%);
+
+    /* Typography */
+
+    /* Body Copy */
+
+    --Font-size-paragraph: 14px;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    background: var(--Very-Dark-Blue);
+    color: var(--White);
+    height: 90%;
+    font-family: "Overpass", sans-serif;
+    font-weight: 400;
+  }
+
+  li {
+    width: 2rem;
+    height: 2rem;
+    background-color: hsl(217deg 18.32% 24.9%);
+    border-radius: 100%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    font-size: 12px;
+    color: var(--Medium-Grey);
+    cursor: pointer;
+  }
+  li:hover {
+    background-color: var(--Orange);
+    color: var(--White);
+  }
+
+  .liColor {
+    background-color: var(--Light-Grey);
+    color: var(--White);
+  }
+
+  p {
+    color: var(--Light-Grey);
+    font-size: 12px;
+    width: 243px;
+    margin: auto;
+  }
+
+  .img2 img {
+    width: 9rem;
+    height: 6rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    li {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    p {
+      width: 100%;
+      font-size: 13px;
+      margin: 0;
+    }
+  }
+</style>
+
 <LayoutChallenges title="Preview Card Component">
-  <main></main>
+  <main
+    class="w-[288px] h-full m-auto flex place-content-center place-items-center md:w-[417px]"
+  >
+    <!-- Rating state start -->
+    <InteractiveSection
+      sectionClass="md:w-[417px] "
+      figureClass="bg-[hsl(217deg_18.32%_24.9%)] rounded-full size-8 flex place-content-center place-items-center md:size-10"
+      imgSrc="/img-of-challenges/third/icon-star.svg"
+      imgAlt="start"
+      dataActiveSlot="before"
+    >
+      <h1 class="text-[2em] font-bold my-4 mx-0 md:my-[1.3rem] md:mx-auto">
+        How did we do?
+      </h1>
+      <p>
+        Please let us know how we did with your support request. All feedback is
+        appreciated to help us improve our offering!
+      </p>
+      <div>
+        <ul class="flex justify-between my-4 mx-0 md:my-[1.3rem] md:mx-auto">
+          <li class="liBtn1">1</li>
+          <li class="liBtn2">2</li>
+          <li class="liBtn3">3</li>
+          <li class="liBtn4">4</li>
+          <li class="liBtn5">5</li>
+        </ul>
+        <button
+          class="w-full h-10 rounded-[30px] bg-[var(--Orange)] text-white pointer hover:bg-[var(--White)] hover:text-[var(--Orange)] md:h-12 md:text-base"
+          >SUBMIT</button
+        >
+      </div>
+    </InteractiveSection>
+    <!-- Rating state end -->
+
+    <!-- Thank you state start -->
+    <InteractiveSection
+      sectionClass="text-center w-[311px] h-[322px] md:!size-[333px] md:p-6"
+      figureClass="img2 py-2 px-0 md:py-[0.6rem] md:px-0"
+      imgSrc="/img-of-challenges/third/illustration-thank-you.svg"
+      imgAlt="thanks"
+      dataActiveSlot="after"
+    >
+      <h2
+        class="dinamic h-[30px] w-[70%] mt-[1em] mx-auto mb-[0.5em]
+      flex pt-[3px] place-content-center place-items-center text-[length:var(--Font-size-paragraph)] font-normal text-[var(--Orange)] bg-[hsl(217deg_18.32%_24.9%)] rounded-[25px] gap-[3px] md:my-[1em] md:mx-auto"
+      >
+        You selected <span id="dinamic_span">0</span> out of 5
+      </h2>
+      <h3 class="title_thanks font-bold text-2xl p-2">Thank you!</h3>
+      <p class="secondselect_text md:!text-[12.5px]">
+        We appreciate you taking the time to give a rating. If you ever need
+        more support, don't hesitate to get in touch!
+      </p>
+    </InteractiveSection>
+  </main>
 </LayoutChallenges>
+
+<script>
+  const sectionBefore = document.querySelector(
+    'section[data-active-slot="before"]'
+  ) as HTMLElement;
+  const sectionAfter = document.querySelector(
+    'section[data-active-slot="after"]'
+  ) as HTMLElement;
+
+  const sumbitBtn = sectionBefore.querySelector("button");
+
+  sumbitBtn.addEventListener("click", () => {
+    sectionBefore.dataset.activeSlot = "after";
+    sectionAfter.dataset.activeSlot = "before";
+  });
+</script>

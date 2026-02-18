@@ -1,0 +1,44 @@
+---
+interface Props {
+  sectionClass: string;
+  figureClass: string;
+  imgSrc: string;
+  imgAlt: string;
+  dataActiveSlot?: "before" | "after";
+}
+
+const { sectionClass, figureClass, imgSrc, imgAlt, dataActiveSlot } =
+  Astro.props;
+---
+
+<style>
+  [data-active-slot="after"] {
+    display: none;
+  }
+  section {
+    width: 100%;
+    background: var(--Dark-Blue);
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  img {
+    width: 45%;
+    height: 45%;
+  }
+  @media screen and (min-width: 768px) {
+    .img2 img {
+      width: 8.5rem;
+      height: 5.5rem;
+    }
+  }
+</style>
+<section
+  class={`${sectionClass} rounded-[15px]`}
+  data-active-slot={dataActiveSlot}
+>
+  <figure class={`${figureClass}`}>
+    <img class="inline" src={imgSrc} alt={imgAlt} />
+  </figure>
+  <slot />
+</section>

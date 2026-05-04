@@ -138,10 +138,10 @@ import InteractiveSection from "../../components/challenges/InteractiveSection.a
       dataActiveSlot="after"
     >
       <h2
-        class="dinamic h-[30px] w-[70%] mt-[1em] mx-auto mb-[0.5em]
+        class="dynamic h-[30px] w-[70%] mt-[1em] mx-auto mb-[0.5em]
       flex pt-[3px] place-content-center place-items-center text-[length:var(--Font-size-paragraph)] font-normal text-[var(--Orange)] bg-[hsl(217deg_18.32%_24.9%)] rounded-[25px] gap-[3px] md:my-[1em] md:mx-auto"
       >
-        You selected <span id="dinamic_span">0</span> out of 5
+        You selected <span id="dynamic_span">0</span> out of 5
       </h2>
       <h3 class="title_thanks font-bold text-2xl p-2">Thank you!</h3>
       <p class="secondselect_text md:!text-[12.5px]">
@@ -153,17 +153,54 @@ import InteractiveSection from "../../components/challenges/InteractiveSection.a
 </LayoutChallenges>
 
 <script>
+  //window dynamic
   const sectionBefore = document.querySelector(
-    'section[data-active-slot="before"]'
+    'section[data-active-slot="before"]',
   ) as HTMLElement;
   const sectionAfter = document.querySelector(
-    'section[data-active-slot="after"]'
+    'section[data-active-slot="after"]',
   ) as HTMLElement;
 
-  const sumbitBtn = sectionBefore.querySelector("button");
+  //btns
+  const liBtns = sectionBefore.querySelectorAll(
+    "[class^='liBtn']",
+  ) as NodeListOf<HTMLElement>;
+  const liBtn1 = liBtns[0] as HTMLElement;
+  const liBtn2 = liBtns[1] as HTMLElement;
+  const liBtn3 = liBtns[2] as HTMLElement;
+  const liBtn4 = liBtns[3] as HTMLElement;
+  const liBtn5 = liBtns[4] as HTMLElement;
+
+  const sumbitBtn = sectionBefore.querySelector("button") as HTMLElement;
+
+  // Span dynamic
+  const dynamicSpan = sectionAfter.querySelector(
+    "#dynamic_span",
+  ) as HTMLElement;
+
+  // Change the button colors dynamically
+
+  liBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Remove the "liColor" class from all buttons
+      console.log("click");
+      liBtns.forEach((b) => b.classList.remove("liColor"));
+      // Add the "liColor" class on the clicked button
+      btn.classList.add("liColor");
+    });
+  });
+
+  const listItems = [];
 
   sumbitBtn.addEventListener("click", () => {
-    sectionBefore.dataset.activeSlot = "after";
-    sectionAfter.dataset.activeSlot = "before";
+    const selectedLi = document.querySelector(".liColor");
+    if (selectedLi) {
+      listItems.push(selectedLi.textContent);
+      dynamicSpan.textContent = selectedLi.textContent;
+      sectionBefore.dataset.activeSlot = "after";
+      sectionAfter.dataset.activeSlot = "before";
+    } else {
+      alert("Please select a rating before submitting.");
+    }
   });
 </script>
